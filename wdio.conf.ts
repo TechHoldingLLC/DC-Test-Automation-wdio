@@ -11,6 +11,15 @@ export const config: WebdriverIO.Config = {
     {
       browserName: "chrome",
     },
+    {
+      browserName: "firefox",
+    },
+    {
+      browserName: "safari",
+    },
+    {
+      browserName: "MicrosoftEdge",
+    },
   ],
 
   logLevel: "info",
