@@ -3,6 +3,7 @@ import Page from "./page.js";
 import { isMobileView } from "../utils/viewUtils.js";
 
 class StroreFront extends Page {
+  // Element getters for cookies and delivery options
   public get acceptCookies() {
     return $("#acceptAllCookieButton");
   }
@@ -15,13 +16,13 @@ class StroreFront extends Page {
   public get toastYayCookie() {
     return $("#cookie8Input");
   }
+
   public get shipCookiesOption() {
     return $("#ship-the-cookies");
   }
   public get inPersonDeliveryOption() {
     return $("#in-person");
   }
-
   public get inPersonDelivery() {
     return $("#delivery-method-in-person");
   }
@@ -40,14 +41,17 @@ class StroreFront extends Page {
     return $('(//*[text()="+"])[7]');
   }
 
+  /**
+   * Clicks the Checkout button to proceed with the order
+   */
   public async clickCheckout() {
     await this.checkoutBtn.click();
   }
 
-  public open() {
-    return super.open("scout/ssbsbs691940");
-  }
-
+  /**
+   * Sets the quantity of Thin Mints cookies.
+   * Uses `+` button on mobile or sets value directly on desktop.
+   */
   public async setThinkMintsQuantity(quantity: number) {
     if (await isMobileView()) {
       const plusButton = $("#cookie1_inc");
@@ -62,6 +66,10 @@ class StroreFront extends Page {
     }
   }
 
+  /**
+   * Sets the quantity of Peanut Butter Sandwich cookies.
+   * Uses `+` button on mobile or sets value directly on desktop.
+   */
   public async setPeanuButterQuantity(quantity: number) {
     if (await isMobileView()) {
       const plusButton = $("#cookie7_inc");
@@ -76,8 +84,18 @@ class StroreFront extends Page {
     }
   }
 
+  /**
+   * Selects the in-person delivery option on the shipping method screen
+   */
   public async selectInPersonDeliveryOption() {
     await this.inPersonDeliveryOption.click();
+  }
+
+  /**
+   * Opens the StoreFront page with a specific scout ID
+   */
+  public open() {
+    return super.open("scout/ssbsbs691940");
   }
 }
 

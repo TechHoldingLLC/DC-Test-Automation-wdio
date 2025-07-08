@@ -2,6 +2,7 @@ import { $ } from "@wdio/globals";
 import Page from "./page.js";
 
 class CheckoutPage extends Page {
+  // Form input getters
   public get inputFirstName() {
     return $("#firstName");
   }
@@ -38,6 +39,8 @@ class CheckoutPage extends Page {
   public get inputCardCvv() {
     return $("#cardCvv");
   }
+
+  // Button and checkbox getters
   public get continueBtn() {
     return $('(//*[@class="btn enabled"])[1]');
   }
@@ -56,18 +59,17 @@ class CheckoutPage extends Page {
   public get cardPaymentOptionSelection() {
     return $('//*[@class="braintree-option braintree-option__card"]');
   }
+
+  // Iframe and iframe-input field getters for payment fields
   get cardholderNameFrame() {
     return $("#braintree-hosted-field-cardholderName");
   }
-
   get cardNumberFrame() {
     return $("#braintree-hosted-field-number");
   }
-
   get expirationDateFrame() {
     return $("#braintree-hosted-field-expirationDate");
   }
-
   get cvvFrame() {
     return $("#braintree-hosted-field-cvv");
   }
@@ -75,21 +77,19 @@ class CheckoutPage extends Page {
   get cardholderNameInput() {
     return $("#cardholder-name");
   }
-
   get cardNumberInput() {
     return $("#credit-card-number");
   }
-
   get expirationInput() {
     return $("#expiration");
   }
-
-  get getInTouch() {
-    return $("//*[@class='in-case']");
-  }
-
   get cvvInput() {
     return $("#cvv");
+  }
+
+  // Order confirmation and other UI elements
+  public get getInTouch() {
+    return $("//*[@class='in-case']");
   }
   public get placeOrderBtn() {
     return $("#placeOrderBtn");
@@ -101,6 +101,9 @@ class CheckoutPage extends Page {
     return $('//*[@class="row notify-message review-text-2 "]');
   }
 
+  /**
+   * Fill all fields in the checkout form (excluding payment details)
+   */
   public async fillCheckoutForm(
     firstName: string,
     lastName: string,
@@ -133,6 +136,9 @@ class CheckoutPage extends Page {
     await this.getInTouch.click();
   }
 
+  /**
+   * Clicks the Continue button after filling details
+   */
   public async continueDetails() {
     await browser.waitUntil(
       async () => (await this.continueBtn.isDisplayed()) === true,
@@ -147,51 +153,75 @@ class CheckoutPage extends Page {
     await this.continueBtn.click();
   }
 
+  /**
+   * Clicks the "Deliver to this address" button
+   */
   public async clickDeliverToAddress() {
     await this.deliverToAddressBtn.click();
   }
+
+  /**
+   * Clicks the donate cookie checkbox
+   */
   public async clickDonateCookieCheckbox() {
     await this.donateCookieCheckbox.click();
   }
+
+  /**
+   * Clicks the continue button on Order Preference screen
+   */
   public async clickOrderPreferenceContinue() {
     await this.orderPreferenceContinue.scrollIntoView();
     await this.orderPreferenceContinue.click();
   }
+
+  /**
+   * Clicks the continue button on Connect With Girl Scout screen
+   */
   public async clickConnectWithGSContinue() {
     await this.connectWithGSContinue.scrollIntoView();
     await this.connectWithGSContinue.click();
   }
 
+  /**
+   * Enters credit card details by switching between payment iframes
+   */
   async enterCardDetails(
     cardHolderName: string,
     cardNumber: string,
     cardExpiration: string,
     cardCvv: string
   ) {
-    await this.cardPaymentOptionSelection.scrollIntoView();
     await this.cardPaymentOptionSelection.scrollIntoView({
       block: "center",
       inline: "center",
     });
     await this.cardPaymentOptionSelection.click();
+
     await this.cardholderNameFrame.waitForExist();
     await browser.switchFrame(this.cardholderNameFrame);
     await this.cardholderNameInput.setValue(cardHolderName);
     await browser.switchToParentFrame();
+
     await this.cardNumberFrame.waitForExist();
     await browser.switchFrame(this.cardNumberFrame);
     await this.cardNumberInput.setValue(cardNumber);
     await browser.switchToParentFrame();
+
     await this.expirationDateFrame.waitForExist();
     await browser.switchFrame(this.expirationDateFrame);
     await this.expirationInput.setValue(cardExpiration);
     await browser.switchToParentFrame();
+
     await this.cvvFrame.waitForExist();
     await browser.switchFrame(this.cvvFrame);
     await this.cvvInput.setValue(cardCvv);
     await browser.switchToParentFrame();
   }
 
+  /**
+   * Clicks on the Place Order button after reviewing the order
+   */
   public async clickPlaceOrder() {
     await this.reviewOrderText.click();
     await browser.pause(2000);
