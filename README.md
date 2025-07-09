@@ -11,35 +11,35 @@ Follow the steps below to set up the project on your local machine and run tests
 1. Clone or Pull the Latest Code from Git
    If you're setting up the project for the first time:
 
-=> git clone <repository-url>
-=> cd <project-directory>
+=> "**git clone <repository-url>**"
+=> "**cd <project-directory>**"
 If the project already exists locally and you want to pull the latest changes:
 
-=> git pull origin main
+=> "**git pull origin main**"
 Replace main with your respective branch name if you're working on a feature branch.
 
 2. Install Project Dependencies
    Once inside the project directory, install all required dependencies using:
 
-=> npm install
+=> "**npm install**"
 This will install all the packages listed in package.json.
 
 3. Run Tests
    You can execute tests either locally or on LambdaTest cloud platform.
 
 - Run Tests Locally
-  => npm run test:local
+  => "**npm run test:local**"
   This will execute the test suite on your local environment.
 
 - Run Tests on LambdaTest
-  => npm run test:lt
+  => "**npm run test:lt**"
   This will trigger the test suite on the LambdaTest cloud infrastructure.
 
 🔐 Connect with your Team Lead to obtain LambdaTest credentials and configuration details if not already available.
 
 4. View Test Report
    Once the test execution is completed, generate and open the Allure report using:
-   => allure generate allure-results --clean && allure open
+   => "**allure generate allure-results --clean && allure open**"
    This command will generate a test execution report and automatically open it in your default browser.
 
 📊 View LambdaTest Dashboard
