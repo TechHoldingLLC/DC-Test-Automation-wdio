@@ -25,6 +25,8 @@
     },
     "include": [
         "test",
-        "wdio.conf.ts"
+        "wdio.base.conf.ts",
+        "wdio.local.conf.ts",
+        "wdio.lambdatest.conf.ts",
     ]
 }

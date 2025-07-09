@@ -1,0 +1,31 @@
+[ {
+  "uid" : "c57670f539d0c71b",
+  "name" : "Verify user is able to place Order on Storefront",
+  "time" : {
+    "start" : 1752058275657,
+    "stop" : 1752058335581,
+    "duration" : 59924
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "4f42bf9bee26e708",
+  "name" : "Verify user is able to place Order on Storefront",
+  "time" : {
+    "start" : 1752058382474,
+    "stop" : 1752058459451,
+    "duration" : 76977
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "8198d96e0a2976bc",
+  "name" : "Verify user is able to place Order on Storefront",
+  "time" : {
+    "start" : 1752058427900,
+    "stop" : 1752058504852,
+    "duration" : 76952
+  },
+  "status" : "passed",
+  "severity" : "normal"
+} ]

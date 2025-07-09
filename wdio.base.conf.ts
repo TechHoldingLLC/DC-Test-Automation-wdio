@@ -1,4 +1,6 @@
-export const config: WebdriverIO.Config = {
+import type { Options } from "@wdio/types";
+
+export const config: Options.Testrunner = {
   //
   // ====================
   // Runner Configuration
@@ -25,9 +27,9 @@ export const config: WebdriverIO.Config = {
   // should work too though). These services define specific user and key (or access key)
   // values you need to put in here in order to connect to these services.
   //
-  hostname: "hub.lambdatest.com",
-  user: process.env.LT_USERNAME,
-  key: process.env.LT_ACCESS_KEY,
+  // hostname: "hub.lambdatest.com",
+  // user: process.env.LT_USERNAME,
+  // key: process.env.LT_ACCESS_KEY,
   //
   // If you run your tests on Sauce Labs you can specify the region you want to run your tests
   // in via the `region` property. Available short handles for regions are `us` (default) and `eu`.
@@ -75,84 +77,6 @@ export const config: WebdriverIO.Config = {
   // If you have trouble getting all important capabilities together, check out the
   // Sauce Labs platform configurator - a great tool to configure your capabilities:
   // https://saucelabs.com/platform/platform-configurator
-  //
-  capabilities: [
-    {
-      browserName: "chrome",
-      browserVersion: "latest",
-      "LT:Options": {
-        platformName: "Windows 10",
-        resolution: "1600x1200",
-        build: "DC-Test-Automation - Web - Chrome",
-        project: "GSUSA",
-        name: "GSUSA - Cross Browser Testing - Chrome",
-        w3c: true,
-      },
-    },
-    {
-      browserName: "Chrome",
-      "LT:Options": {
-        platformName: "android",
-        platformVersion: "14",
-        appiumVersion: "2.6.0",
-        deviceName: "Pixel 9 Pro",
-        build: "DC-Test-Automation - Mobile - Android - Chrome",
-        project: "GSUSA",
-        name: "GSUSA - Mobile Browser Testing - Android with Chrome",
-        w3c: true,
-      },
-    },
-    {
-      browserName: "Safari",
-      "LT:Options": {
-        platformName: "ios",
-        platformVersion: "18.1",
-        appiumVersion: "2.11.3",
-        deviceName: "iPhone 16 Pro Max",
-        build: "DC-Test-Automation - Mobile - iOS - Safari",
-        project: "GSUSA",
-        name: "GSUSA - Mobile Browser Testing - iOS and Safari",
-        w3c: true,
-      },
-    },
-
-    {
-      browserName: "Firefox",
-      browserVersion: "latest",
-      "LT:Options": {
-        platformName: "macOS Big sur",
-        resolution: "2560x1440",
-        build: "DC-Test-Automation - Web - Firefox",
-        project: "GSUSA",
-        name: "GSUSA - Cross Browser Testing - Firefox",
-        w3c: true,
-      },
-    },
-    {
-      browserName: "Safari",
-      browserVersion: "17",
-      "LT:Options": {
-        platformName: "macOS Sonoma",
-        resolution: "1920x1080",
-        build: "DC-Test-Automation - Web - Safari",
-        project: "GSUSA",
-        name: "GSUSA - Cross Browser Testing - Safari",
-        w3c: true,
-      },
-    },
-    {
-      browserName: "MicrosoftEdge",
-      browserVersion: "latest",
-      "LT:Options": {
-        platformName: "Windows 11",
-        resolution: "1680x1050",
-        build: "DC-Test-Automation - Web - Microsoft Edge",
-        project: "GSUSA",
-        name: "GSUSA - Cross Browser Testing - MicrosoftEdge",
-        w3c: true,
-      },
-    },
-  ],
 
   //
   // ===================
@@ -201,7 +125,7 @@ export const config: WebdriverIO.Config = {
   // Services take over a specific job you don't want to take care of. They enhance
   // your test setup with almost no effort. Unlike plugins, they don't add new
   // commands. Instead, they hook themselves up into the test process.
-  services: ["lambdatest"],
+  services: [],
 
   // Framework you want to run your specs with.
   // The following are supported: Mocha, Jasmine, and Cucumber
@@ -226,14 +150,14 @@ export const config: WebdriverIO.Config = {
   // see also: https://webdriver.io/docs/dot-reporter
   reporters: [
     "spec",
-    // [
-    //   "allure",
-    //   {
-    //     outputDir: "allure-results",
-    //     disableWebdriverStepsReporting: true,
-    //     disableWebdriverScreenshotsReporting: true,
-    //   },
-    // ],
+    [
+      "allure",
+      {
+        outputDir: "allure-results",
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: true,
+      },
+    ],
   ],
 
   // Options to be passed to Mocha.
@@ -241,6 +165,16 @@ export const config: WebdriverIO.Config = {
   mochaOpts: {
     ui: "bdd",
     timeout: 6000000,
+  },
+  afterTest: async function (
+    test,
+    context,
+    { error, result, duration, passed, retries }
+  ) {
+    // If a test fails, capture a screenshot and attach it to the Allure report
+    if (error) {
+      await browser.takeScreenshot();
+    }
   },
 
   //

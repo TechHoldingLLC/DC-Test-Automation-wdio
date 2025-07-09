@@ -143,13 +143,13 @@ class CheckoutPage extends Page {
     await browser.waitUntil(
       async () => (await this.continueBtn.isDisplayed()) === true,
       {
-        timeout: 2000,
+        timeout: 5000,
         timeoutMsg: "Continue Button is not displayed",
       }
     );
     await this.continueBtn.waitForClickable();
     await this.continueBtn.scrollIntoView();
-    await browser.pause(2000);
+    await browser.pause(5000);
     await this.continueBtn.click();
   }
 

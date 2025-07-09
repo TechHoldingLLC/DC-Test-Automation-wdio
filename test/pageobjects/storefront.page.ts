@@ -94,8 +94,13 @@ class StroreFront extends Page {
   /**
    * Opens the StoreFront page with a specific scout ID
    */
-  public open() {
-    return super.open("scout/ssbsbs691940");
+  public async open() {
+    if (await isMobileView()) {
+      return super.open("scout/ssbsbs691940");
+    } else {
+      await browser.maximizeWindow();
+      return super.open("scout/ssbsbs691940?mobile=true");
+    }
   }
 }
 
