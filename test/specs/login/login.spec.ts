@@ -1,6 +1,6 @@
 import { expect } from "@wdio/globals";
-import LoginPage from "../pageobjects/login.page.js";
-import * as loginData from "../data/login/loginData.json";
+import LoginPage from "../../pageobjects/login/login.page.js";
+import * as loginData from "../../data/login/loginData.json";
 
 /**
  * Test suite for verifying login functionality on the application

@@ -1,5 +1,5 @@
 import { expect } from "@wdio/globals";
-import LoginPage from "../pageobjects/login.page.js";
+import LoginPage from "../pageobjects/login/login.page.js";
 import NationalDashboard from "../pageobjects/nationalDashboard.page.js";
 import * as loginData from "../data/login/loginData.json";
 

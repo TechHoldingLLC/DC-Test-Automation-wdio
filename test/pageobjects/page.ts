@@ -6,6 +6,6 @@ export default class Page {
    * @param path - The relative path to navigate to
    */
   public open(path: string) {
-    return browser.url(`https://cuat.digitalcookie.girlscouts.org/${path}`);
+    return browser.url(`https://cqa.digitalcookie.girlscouts.org/${path}`);
   }
 }

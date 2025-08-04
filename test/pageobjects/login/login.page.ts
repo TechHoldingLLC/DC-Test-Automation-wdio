@@ -1,5 +1,5 @@
 import { $ } from "@wdio/globals";
-import Page from "./page.js";
+import Page from "../page.js";
 
 class LoginPage extends Page {
   // Getter for email input field
@@ -22,6 +22,10 @@ class LoginPage extends Page {
     return $(
       "span=The email or password entered is incorrect. Please try again."
     );
+  }
+
+  public get needHelpToLoginLink() {
+    return $("=Need help to log in");
   }
 
   /**
