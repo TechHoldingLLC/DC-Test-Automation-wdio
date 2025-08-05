@@ -52,7 +52,7 @@ export const config: Options.Testrunner = {
   // of the config file unless it's absolute.
   //
   // specs: ["./test/specs/**/*.ts"],
-  specs: ["./test/specs/login/registration.spec.ts"],
+  specs: ["./test/specs/login/forgotPassword.spec.ts"],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
