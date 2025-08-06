@@ -1,4 +1,5 @@
 import { browser } from "@wdio/globals";
+import { getBaseUrl } from "../utils/envUtils"; // Adjust path as needed
 
 export default class Page {
   /**
@@ -6,6 +7,7 @@ export default class Page {
    * @param path - The relative path to navigate to
    */
   public open(path: string) {
-    return browser.url(`https://cqa.digitalcookie.girlscouts.org/${path}`);
+    const baseUrl = getBaseUrl();
+    return browser.url(`${baseUrl}${path}`);
   }
 }
