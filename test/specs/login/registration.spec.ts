@@ -1,6 +1,6 @@
 import { expect } from "@wdio/globals";
-import LoginPage from "../../pageobjects/login/login.page.js";
-import RegistrationPage from "../../pageobjects/login/registration.page.js";
+import LoginPage from "../../pageobjects/login-pages/login.page.js";
+import RegistrationPage from "../../pageobjects/login-pages/registration.page.js";
 import { selectors } from "../../common/selectors.js";
 import { errorMessages } from "../../common/errorMessages.js";
 import { successMessages } from "../../common/successMessages.js";

@@ -1,5 +1,5 @@
 import { browser } from "@wdio/globals";
-import { getBaseUrl } from "../utils/envUtils"; // Adjust path as needed
+import { getBaseUrl } from "../../utils/envUtils"; // Adjust path as needed
 
 export default class Page {
   /**
