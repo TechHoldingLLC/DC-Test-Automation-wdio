@@ -31,4 +31,4 @@ jobs:
         run: npm ci
 
       - name: Run WDIO tests
-        run: TEST_ENV=${{ github.event.inputs.environment }} npx wdio run ./wdio.local.config.ts
+        run: TEST_ENV=${{ github.event.inputs.environment }} npx wdio run ./wdio.base.config.ts
