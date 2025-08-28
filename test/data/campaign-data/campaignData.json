@@ -1,0 +1,11 @@
+{
+  "cqa": {
+    "campaignId": "2024-198-004"
+  },
+  "cuat": {
+    "campaignId": ""
+  },
+  "prod": {
+    "campaignId": ""
+  }
+}

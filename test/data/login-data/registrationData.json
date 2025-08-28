@@ -1,0 +1,14 @@
+{
+  "cqa": {
+    "validRegistrationEmail": "priyanka.shah+104101371@techholding.co",
+    "invalidRegistrationEmail": "priyanka.shah@techholding.co"
+  },
+  "cuat": {
+    "validRegistrationEmail": "",
+    "invalidRegistrationEmail": "priyanka.shah@techholding.co"
+  },
+  "prod": {
+    "validRegistrationEmail": "",
+    "invalidRegistrationEmail": "priyanka.shah@techholding.co"
+  }
+}

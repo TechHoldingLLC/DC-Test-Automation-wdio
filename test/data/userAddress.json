@@ -1,0 +1,11 @@
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "address1": "123 Main St",
+  "address2": "Apt 4B",
+  "city": "Los Angeles",
+  "state": "California",
+  "zip": "90035",
+  "phone": "615-763-5478",
+  "email": "johnDoe@test.com"
+}

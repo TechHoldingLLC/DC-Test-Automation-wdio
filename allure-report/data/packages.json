@@ -1,0 +1,48 @@
+{
+  "uid" : "83edc06c07f9ae9e47eb6dd1b683e4e2",
+  "name" : "packages",
+  "children" : [ {
+    "name" : ".Users.prabhavjoshi.Documents.Automation.GSUSA_WDIO.WDIO-with-Lambdatest.DC-Test-Automation-wdio.test.specs.orderCookie.spec.ts",
+    "children" : [ {
+      "name" : "Verify user is able to place Order on Storefront",
+      "uid" : "c57670f539d0c71b",
+      "parentUid" : "89c816852a779182d6b4d2c9c8be2b02",
+      "status" : "passed",
+      "time" : {
+        "start" : 1752058275657,
+        "stop" : 1752058335581,
+        "duration" : 59924
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ "chrome-138.0.7204.93" ]
+    }, {
+      "name" : "Verify user is able to place Order on Storefront",
+      "uid" : "4f42bf9bee26e708",
+      "parentUid" : "89c816852a779182d6b4d2c9c8be2b02",
+      "status" : "passed",
+      "time" : {
+        "start" : 1752058382474,
+        "stop" : 1752058459451,
+        "duration" : 76977
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ "firefox-140.0.2" ]
+    }, {
+      "name" : "Verify user is able to place Order on Storefront",
+      "uid" : "8198d96e0a2976bc",
+      "parentUid" : "89c816852a779182d6b4d2c9c8be2b02",
+      "status" : "passed",
+      "time" : {
+        "start" : 1752058427900,
+        "stop" : 1752058504852,
+        "duration" : 76952
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ "chrome" ]
+    } ],
+    "uid" : ".Users.prabhavjoshi.Documents.Automation.GSUSA_WDIO.WDIO-with-Lambdatest.DC-Test-Automation-wdio.test.specs.orderCookie.spec.ts"
+  } ]
+}
