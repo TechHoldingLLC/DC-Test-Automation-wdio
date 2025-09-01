@@ -6,4 +6,7 @@ export const successMessages = {
   registration: {
     confirmation: "registration email has been sent",
   },
+  campaign: {
+    campaignUpdated: "Campaign changes have been saved successfully!",
+  },
 };
