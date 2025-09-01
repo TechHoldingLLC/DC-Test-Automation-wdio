@@ -1,0 +1,4 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Wed Jul 09 16:23:02 IST 2025","Wed Jul 09 16:24:19 IST 2025","76977","","Checkout Cookie","","","","Verify user is able to place Order on Storefront",""
+"passed","Wed Jul 09 16:21:15 IST 2025","Wed Jul 09 16:22:15 IST 2025","59924","","Checkout Cookie","","","","Verify user is able to place Order on Storefront",""
+"passed","Wed Jul 09 16:23:47 IST 2025","Wed Jul 09 16:25:04 IST 2025","76952","","Checkout Cookie","","","","Verify user is able to place Order on Storefront",""

@@ -1,0 +1,48 @@
+{
+  "uid" : "98d3104e051c652961429bf95fa0b5d6",
+  "name" : "suites",
+  "children" : [ {
+    "name" : "Checkout Cookie",
+    "children" : [ {
+      "name" : "Verify user is able to place Order on Storefront",
+      "uid" : "c57670f539d0c71b",
+      "parentUid" : "5906bd02501d5964e4323f1d4bc0da01",
+      "status" : "passed",
+      "time" : {
+        "start" : 1752058275657,
+        "stop" : 1752058335581,
+        "duration" : 59924
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ "chrome-138.0.7204.93" ]
+    }, {
+      "name" : "Verify user is able to place Order on Storefront",
+      "uid" : "4f42bf9bee26e708",
+      "parentUid" : "5906bd02501d5964e4323f1d4bc0da01",
+      "status" : "passed",
+      "time" : {
+        "start" : 1752058382474,
+        "stop" : 1752058459451,
+        "duration" : 76977
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ "firefox-140.0.2" ]
+    }, {
+      "name" : "Verify user is able to place Order on Storefront",
+      "uid" : "8198d96e0a2976bc",
+      "parentUid" : "5906bd02501d5964e4323f1d4bc0da01",
+      "status" : "passed",
+      "time" : {
+        "start" : 1752058427900,
+        "stop" : 1752058504852,
+        "duration" : 76952
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ "chrome" ]
+    } ],
+    "uid" : "5906bd02501d5964e4323f1d4bc0da01"
+  } ]
+}
