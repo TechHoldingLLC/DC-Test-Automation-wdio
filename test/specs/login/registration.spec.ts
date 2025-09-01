@@ -9,7 +9,7 @@ import { loadEnvBasedData } from "../../utils/envUtils.js";
 
 let registrationData: any;
 
-describe("Registration Tests", () => {
+describe("Registration Tests @registration", () => {
   before(async () => {
     registrationData = loadEnvBasedData("login/registrationData.json");
   });
@@ -19,7 +19,7 @@ describe("Registration Tests", () => {
     await LoginPage.needHelpToLoginLink.click();
   });
 
-  it("Verify that the user is able to access the request for registration email link", async () => {
+  it("Verify that the user is able to access the request for registration email link @smoke @regression", async () => {
     await expect(browser).toHaveUrl(
       expect.stringContaining(routes.auth.loginHelp)
     );
@@ -31,7 +31,7 @@ describe("Registration Tests", () => {
     );
   });
 
-  it("Verify that user is not able to submit request when council has not started the process", async () => {
+  it("Verify that user is not able to submit request when council has not started the process @regression", async () => {
     await RegistrationPage.requestRegistrationEmailLink.click();
     await RegistrationPage.registerEmailInput.waitForClickable();
     await RegistrationPage.registerEmailInput.setValue(
@@ -44,7 +44,7 @@ describe("Registration Tests", () => {
     await expect(errorElement).toBeDisplayed();
   });
 
-  it("Verify that user is able to submit the registration request", async () => {
+  it("Verify that user is able to submit the registration request @smoke @regression", async () => {
     await RegistrationPage.requestRegistrationEmailLink.click();
     await RegistrationPage.registerEmailInput.waitForClickable();
     await RegistrationPage.registerEmailInput.setValue(

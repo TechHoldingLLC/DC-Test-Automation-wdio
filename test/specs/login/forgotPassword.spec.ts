@@ -7,20 +7,20 @@ import { successMessages } from "../../common/successMessages.js";
 import ForgotPasswordPage from "../../pageobjects/login-pages/forgotPassword.page.js";
 import * as forgotPasswordData from "../../data/login-data/forgotPasswordData.json";
 
-describe("Forgot Password Tests", () => {
+describe("Forgot Password Tests @forgot password", () => {
   beforeEach(async () => {
     await LoginPage.open();
     await LoginPage.forgotPasswordLink.click();
   });
 
-  it("Verify that user can access forgot password link", async () => {
+  it("Verify that user can access forgot password link @smoke @regression", async () => {
     await selectors.emailInput.waitForDisplayed();
     await expect(browser).toHaveUrl(
       expect.stringContaining(routes.auth.forgotPassword)
     );
   });
 
-  it("Verify that Email is mandatory field on Forgot Password page", async () => {
+  it("Verify that Email is mandatory field on Forgot Password page @smoke @regression", async () => {
     await selectors.submitButton.waitForClickable();
     await selectors.submitButton.click();
     const errorElement = $(
@@ -29,7 +29,7 @@ describe("Forgot Password Tests", () => {
     await expect(errorElement).toBeDisplayed();
   });
 
-  it("Verify that Invalid email is not accepted on Forgot Password page", async () => {
+  it("Verify that Invalid email is not accepted on Forgot Password page @regression", async () => {
     await ForgotPasswordPage.requestPasswordReset(
       forgotPasswordData.invalidEmail
     );
@@ -39,7 +39,7 @@ describe("Forgot Password Tests", () => {
     await expect(errorElement).toBeDisplayed();
   });
 
-  it("Verify that Valid email is accepted on Forgot Password page", async () => {
+  it("Verify that Valid email is accepted on Forgot Password page @smoke @regression", async () => {
     await ForgotPasswordPage.requestPasswordReset(
       forgotPasswordData.validEmail
     );

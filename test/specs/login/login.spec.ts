@@ -6,7 +6,7 @@ import * as loginData from "../../data/login-data/loginData.json";
 /**
  * Test suite for verifying login functionality on the application
  */
-describe("Login Tests", () => {
+describe("Login Tests @regression @smoke @login", () => {
   /**
    * Runs before each test - opens the login page
    */

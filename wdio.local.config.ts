@@ -2,6 +2,7 @@ import { config as baseConfig } from "./wdio.base.conf";
 
 export const config: WebdriverIO.Config = {
   ...baseConfig,
+
   capabilities: [
     {
       browserName: "chrome",
@@ -18,4 +19,10 @@ export const config: WebdriverIO.Config = {
   ],
 
   services: [],
+
+  mochaOpts: {
+    ui: "bdd",
+    timeout: 60000,
+    grep: process.env.TAGS || "", // Pick tags dynamically from CLI/env
+  },
 };

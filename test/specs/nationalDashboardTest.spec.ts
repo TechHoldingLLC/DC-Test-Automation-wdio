@@ -6,7 +6,7 @@ import * as loginData from "../data/login-data/loginData.json";
 /**
  * Test suite for verifying elements and charts displayed on the National Dashboard
  */
-describe("National Dashboard", () => {
+describe("National Dashboard @nationalDashboard", () => {
   /**
    * Runs before each test:
    * - Opens the login page
@@ -21,7 +21,7 @@ describe("National Dashboard", () => {
    * Test Case: Verify visibility of 'Total Digital Sales' chart on the dashboard
    * Expected Result: 'Total Digital Sales' chart should be displayed
    */
-  it("Verify that 'Total Digital Sales' chart is available on national dashboard", async () => {
+  it("Verify that 'Total Digital Sales' chart is available on national dashboard @regression", async () => {
     await NationalDashboard.dashboardHeader.waitForDisplayed();
     await expect(NationalDashboard.totalDigitalSalesChart).toBeDisplayed();
   });
@@ -30,7 +30,7 @@ describe("National Dashboard", () => {
    * Test Case: Verify visibility of 'Online Sales by Cookie' chart on the dashboard
    * Expected Result: 'Online Sales by Cookie' chart should be displayed
    */
-  it("Verify that 'Online Sales by Cookie' chart is available on national dashboard", async () => {
+  it("Verify that 'Online Sales by Cookie' chart is available on national dashboard @regression", async () => {
     await NationalDashboard.dashboardHeader.waitForDisplayed();
     await expect(NationalDashboard.onlineSalesByCookieChart).toBeDisplayed();
   });
