@@ -1,6 +1,6 @@
 import Page from "./page";
 
-export default class BasePage extends Page {
+class BasePage extends Page {
   /**
    * Clicks the search button in the header
    */
@@ -40,5 +40,30 @@ export default class BasePage extends Page {
     await element.waitForClickable();
     await element.click();
   }
+
+  /**
+   * Clicks the "<< search" link on pages that have it
+   */
+  async backToSearchScreen(): Promise<void> {
+    // Using partial link text for more flexibility
+    const backToSearchLink = $("*=search");
+    await backToSearchLink.waitForClickable();
+    await backToSearchLink.click();
+  }
+
+  /**
+   * Waits for a message containing the given text to appear on screen
+   * @param messageText - the exact or partial text of the message
+   */
+  public async expectMessageDisplayed(messageText: string): Promise<void> {
+    const messageEl = $(`//*[contains(text(), "${messageText}")]`);
+    await messageEl.waitForDisplayed({
+      timeout: 5000,
+      timeoutMsg: `Expected message "${messageText}" was not displayed`,
+    });
+    await expect(messageEl).toBeDisplayed();
+  }
 }
 
+// Export a singleton instance
+export default new BasePage();

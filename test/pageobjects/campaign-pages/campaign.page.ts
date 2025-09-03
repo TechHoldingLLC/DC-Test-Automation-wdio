@@ -1,13 +1,16 @@
 import { $ } from "@wdio/globals";
 import BasePage from "../core/basepage.js";
-import { get } from "http";
+import LoginPage from "../login-pages/login.page.js";
+import Page from "../core/page.js";
 
-class CampaignPage extends BasePage {
+class CampaignPage extends Page {
   /**
    * Navigate to the Campaign page via the menu
    */
   async open() {
-    await this.openMenu("Campaign");
+    await LoginPage.open();
+    await LoginPage.login();
+    await BasePage.openMenu("Campaign");
   }
 
   // Form input getters
@@ -21,12 +24,12 @@ class CampaignPage extends BasePage {
 
   public async searchAndOpenCampaign(CampaignId: string): Promise<void> {
     await this.searchByCampaignId(CampaignId);
-    await this.clickLinkInTableCell("Campaign ID", CampaignId);
+    await BasePage.clickLinkInTableCell("Campaign ID", CampaignId);
   }
 
   public async getCookieQuotaInput(cookieName: string) {
     return $(
-      `//input[contains(@id, '.quota') and preceding-sibling::td[contains(text(), '${cookieName}')]]`
+      `//td[contains(., '${cookieName}')]/following-sibling::td/input[contains(@id, '.quota')]`
     );
   }
 
@@ -41,8 +44,7 @@ class CampaignPage extends BasePage {
 
   public async getCookieQuotaValue(cookieName: string): Promise<string> {
     const quotaInput = await this.getCookieQuotaInput(cookieName);
-    await quotaInput.waitForDisplayed();
-    return quotaInput.getValue();
+    return quotaInput.getAttribute("value");
   }
 }
 export default new CampaignPage();
