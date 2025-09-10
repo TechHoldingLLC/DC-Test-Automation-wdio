@@ -25,15 +25,12 @@ Replace main with your respective branch name if you're working on a feature bra
 This will install all the packages listed in package.json.
 
 3. Run Tests
-   You can execute tests either locally or on LambdaTest cloud platform.
+   You can execute tests either locally or on LambdaTest cloud platform, with or without tags.
 
-- Run Tests Locally
-  => "**npm run test:local**"
-  This will execute the test suite on your local environment.
-
-- Run Tests on LambdaTest
-  => "**npm run test:lt**"
-  This will trigger the test suite on the LambdaTest cloud infrastructure.
+- Refer "TEST_EXECUTIOM_GUIDE.md"
+  OR
+- Exeute following command
+  "**npm run help**"
 
 🔐 Connect with your Team Lead to obtain LambdaTest credentials and configuration details if not already available.
 

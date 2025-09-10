@@ -51,8 +51,8 @@ export const config: Options.Testrunner = {
   // The path of the spec files will be resolved relative from the directory of
   // of the config file unless it's absolute.
   //
-  // specs: ["./test/specs/**/*.ts"],
-  specs: ["./test/specs/login/forgotPassword.spec.ts"],
+  specs: ["./test/specs/**/*.ts"],
+  // specs: ["./test/specs/login/forgotPassword.spec.ts"],
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
@@ -113,7 +113,7 @@ export const config: Options.Testrunner = {
   // baseUrl: 'http://localhost:8080',
   //
   // Default timeout for all waitFor* commands.
-  waitforTimeout: 100000,
+  waitforTimeout: 10000,
   //
   // Default timeout in milliseconds for request
   // if browser driver or grid doesn't send response
@@ -161,11 +161,11 @@ export const config: Options.Testrunner = {
     ],
   ],
 
-  // Options to be passed to Mocha.
+  // Options to be passed to Mocha
   // See the full list at http://mochajs.org/
   mochaOpts: {
     ui: "bdd",
-    timeout: 6000000,
+    timeout: 12000000,
   },
   afterTest: async function (
     test,

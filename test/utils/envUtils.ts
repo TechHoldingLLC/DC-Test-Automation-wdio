@@ -13,7 +13,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 export const loadEnvBasedData = (relativePath: string) => {
-  const filePath = path.resolve(__dirname, "../data", relativePath);
+  const filePath = path.resolve(__dirname, "../../test/data/", relativePath);
   const rawData = fs.readFileSync(filePath, "utf-8");
   const json = JSON.parse(rawData);
   return json[ENV];
