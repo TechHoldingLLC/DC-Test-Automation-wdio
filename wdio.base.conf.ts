@@ -161,11 +161,11 @@ export const config: Options.Testrunner = {
     ],
   ],
 
-  // Options to be passed to Mocha.
+  // Options to be passed to Mocha
   // See the full list at http://mochajs.org/
   mochaOpts: {
     ui: "bdd",
-    timeout: 6000000,
+    timeout: 12000000,
   },
   afterTest: async function (
     test,

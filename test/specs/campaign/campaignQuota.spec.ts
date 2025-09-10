@@ -5,95 +5,251 @@ import { selectors } from "../../common/selectors.js";
 import { successMessages } from "../../common/successMessages.js";
 import BasePage from "../../pageobjects/core/basepage.js";
 import LoginPage from "../../pageobjects/login-pages/login.page.js";
-let campaignData: any;
-let quotaValue: string;
+import * as cookiesData from "../../data/common/cookies.json";
 
+// Success message to verify campaign updates
+const campaignUpdateMessage = successMessages.campaign.campaignUpdated;
+
+// Variables reused across tests
+let quotaValue: string;
+let cookieName: string;
+let campaignData: any;
+
+// Group of tests for Campaign Quota feature
 describe("Campaign Quota Tests @campaignQuota", () => {
+  // Load campaign data before running tests
   before(async () => {
     campaignData = loadEnvBasedData("campaign-data/campaignData.json");
   });
 
+  // Navigate to Campaign Page before each test
   beforeEach(async () => {
     await CampaignPage.open();
   });
 
   it("Verify that quota can be set for a cookie variety (standard)", async () => {
-    quotaValue = "100";
+    quotaValue = (await BasePage.generateRandomThreeDigits()).toString();
+    let cookie: string = cookiesData.cookiesName[0];
+
+    // Open specific campaign by ID
     await CampaignPage.searchAndOpenCampaign(campaignData.campaignId);
-    await CampaignPage.fillQuotaForCookie("Thin Mints", quotaValue);
+
+    // Fill quota for a cookie
+    await CampaignPage.fillQuotaForCookie(cookie, quotaValue);
+
+    // Save changes
     await selectors.submitButton.click();
-    // await expect(successMessages.campaign.campaignUpdated).toBeDisplayed();
-    // await expect(
-    //   $(`//*[text()='${successMessages.campaign.campaignUpdated}']`)
-    // ).toBeDisplayed();
+    await BasePage.expectMessageAppeared(campaignUpdateMessage);
+
+    // Go back and re-open campaign to confirm persistence
     await BasePage.backToSearchScreen();
     await CampaignPage.searchAndOpenCampaign(campaignData.campaignId);
+
+    // Assert quota value matches the expected input
     await expect(
-      (await CampaignPage.getCookieQuotaValue("Thin Mints")).toString()
+      (await CampaignPage.getCookieQuotaValue(cookie)).toString()
     ).toEqual(quotaValue);
   });
-});
+  it("Verify that an existing quota can be edited", async () => {
+    quotaValue = (await BasePage.generateRandomThreeDigits()).toString();
+    let updatedQuotaValue: string = (
+      await BasePage.generateRandomThreeDigits()
+    ).toString();
+    cookieName = cookiesData.cookiesName[1];
 
-it("Verify that an existing quota can be edited", async () => {
-  quotaValue = "100";
-  let updatedQuotaValue: string = "150";
-  await CampaignPage.searchAndOpenCampaign(campaignData.campaignId);
-  await CampaignPage.fillQuotaForCookie("Trefoils", quotaValue);
-  await selectors.submitButton.click();
-  await BasePage.backToSearchScreen();
-  await CampaignPage.searchAndOpenCampaign(campaignData.campaignId);
-  await CampaignPage.fillQuotaForCookie("Trefoils", updatedQuotaValue);
-  await expect(
-    (await CampaignPage.getCookieQuotaValue("Trefoils")).toString()
-  ).toEqual(updatedQuotaValue);
-});
+    // Open campaign and set initial quota
+    await CampaignPage.searchAndOpenCampaign(campaignData.campaignId);
+    await CampaignPage.fillQuotaForCookie(cookieName, quotaValue);
+    await selectors.submitButton.click();
+    await BasePage.expectMessageAppeared(campaignUpdateMessage);
 
-it("Verify that quota value persists across sessions @only", async () => {
-  quotaValue = "200";
-  await CampaignPage.searchAndOpenCampaign(campaignData.campaignId);
-  await CampaignPage.fillQuotaForCookie("Adventurefuls", quotaValue);
-  await selectors.submitButton.click();
-  await LoginPage.logout();
-  await CampaignPage.open();
-  await CampaignPage.searchAndOpenCampaign(campaignData.campaignId);
-  await expect(await CampaignPage.getCookieQuotaValue("Samoas")).toEqual(
-    quotaValue
-  );
-});
+    // Re-open campaign and update quota
+    await BasePage.backToSearchScreen();
+    await CampaignPage.searchAndOpenCampaign(campaignData.campaignId);
+    await CampaignPage.fillQuotaForCookie(cookieName, updatedQuotaValue);
+    await selectors.submitButton.click();
+    await BasePage.expectMessageAppeared(campaignUpdateMessage);
 
-it("Verify that blank quota input is handled", async () => {
-  quotaValue = "200";
-  await CampaignPage.searchAndOpenCampaign(campaignData.campaignId);
-  await CampaignPage.fillQuotaForCookie("Samoas", quotaValue);
-  await selectors.submitButton.click();
-  (await CampaignPage.getCookieQuotaInput("Samoas")).clearValue();
-  await selectors.submitButton.click();
-  await expect(await CampaignPage.getCookieQuotaValue("Samoas")).toEqual("");
-});
+    // Validate updated quota value is saved
+    await expect(
+      (await CampaignPage.getCookieQuotaValue(cookieName)).toString()
+    ).toEqual(updatedQuotaValue);
+  });
 
-it("Verify that an extremely large quota is accepted", async () => {
-  quotaValue = "999999999";
-  await CampaignPage.searchAndOpenCampaign(campaignData.campaignId);
-  await CampaignPage.fillQuotaForCookie("Exploremores", quotaValue);
-  await selectors.submitButton.click();
-  await expect(await CampaignPage.getCookieQuotaValue("Exploremores")).toEqual(
-    quotaValue
-  );
-});
+  it("Verify that quota value persists across sessions", async () => {
+    quotaValue = (await BasePage.generateRandomThreeDigits()).toString();
+    cookieName = cookiesData.cookiesName[2];
 
-it("Verify that non-numeric quota input is rejected", async () => {
-  quotaValue = "fifty";
-  await CampaignPage.searchAndOpenCampaign(campaignData.campaignId);
-  await CampaignPage.fillQuotaForCookie("Toffee-tastic", quotaValue);
-  await selectors.submitButton.click();
+    // Set quota and save
+    await CampaignPage.searchAndOpenCampaign(campaignData.campaignId);
+    await CampaignPage.fillQuotaForCookie(cookieName, quotaValue);
+    await selectors.submitButton.click();
+    await BasePage.expectMessageAppeared(campaignUpdateMessage);
 
-  // expect message is shown
-  await BasePage.expectMessageDisplayed(
-    "Campaign changes have been saved successfully!"
-  );
+    // Logout and login again
+    await LoginPage.logout();
+    await CampaignPage.open();
+    await CampaignPage.searchAndOpenCampaign(campaignData.campaignId);
 
-  // expect quota is not saved
-  await expect(await CampaignPage.getCookieQuotaValue("Toffee-tastic")).toEqual(
-    ""
-  );
+    // Verify quota is still set correctly
+    await expect(await CampaignPage.getCookieQuotaValue(cookieName)).toEqual(
+      quotaValue
+    );
+  });
+
+  it("Verify that blank quota input is handled", async () => {
+    quotaValue = (await BasePage.generateRandomThreeDigits()).toString();
+    cookieName = cookiesData.cookiesName[3];
+
+    // Save initial quota
+    await CampaignPage.searchAndOpenCampaign(campaignData.campaignId);
+    await CampaignPage.fillQuotaForCookie(cookieName, quotaValue);
+    await selectors.submitButton.click();
+    await BasePage.expectMessageAppeared(campaignUpdateMessage);
+
+    // Clear quota input and save again
+    (await CampaignPage.getCookieQuotaInput(cookieName)).clearValue();
+    await selectors.submitButton.click();
+
+    // Verify quota value is now empty
+    await expect(await CampaignPage.getCookieQuotaValue(cookieName)).toEqual(
+      ""
+    );
+  });
+
+  it("Verify that an extremely large quota is accepted", async () => {
+    quotaValue = (await BasePage.generateRandomNineDigits()).toString();
+    cookieName = cookiesData.cookiesName[4];
+
+    // Set large quota
+    await CampaignPage.searchAndOpenCampaign(campaignData.campaignId);
+    await CampaignPage.fillQuotaForCookie(cookieName, quotaValue);
+    await selectors.submitButton.click();
+    await BasePage.expectMessageAppeared(campaignUpdateMessage);
+
+    // Validate it is saved correctly
+    await expect(await CampaignPage.getCookieQuotaValue(cookieName)).toEqual(
+      quotaValue
+    );
+  });
+
+  it("Verify that non-numeric quota input is rejected", async () => {
+    quotaValue = (await BasePage.generateRandomFiveChars()).toString();
+    cookieName = cookiesData.cookiesName[5];
+
+    // Try setting non-numeric quota
+    await CampaignPage.searchAndOpenCampaign(campaignData.campaignId);
+    await CampaignPage.fillQuotaForCookie(cookieName, quotaValue);
+    await selectors.submitButton.click();
+
+    // Expect success message
+    await BasePage.expectMessageAppeared(campaignUpdateMessage);
+
+    // Quota should not actually be saved (remains blank)
+    await expect(
+      await CampaignPage.getCookieQuotaValue("Toffee-tastic")
+    ).toEqual("");
+  });
+
+  it("Verify that decimal quota input is handled", async () => {
+    quotaValue = "12.5";
+    cookieName = cookiesData.cookiesName[6];
+
+    // Try setting non-numeric quota
+    await CampaignPage.searchAndOpenCampaign(campaignData.campaignId);
+    await CampaignPage.fillQuotaForCookie(cookieName, quotaValue);
+    await selectors.submitButton.click();
+
+    // Expect success message
+    await BasePage.expectMessageAppeared(campaignUpdateMessage);
+
+    // Quota should not ignore points and save only integer part
+    await expect(await CampaignPage.getCookieQuotaValue(cookieName)).toEqual(
+      "125"
+    );
+  });
+
+  it("Verify that negative quota input is handled", async () => {
+    quotaValue = "-10";
+    cookieName = cookiesData.cookiesName[7];
+
+    // Try setting non-numeric quota
+    await CampaignPage.searchAndOpenCampaign(campaignData.campaignId);
+    await CampaignPage.fillQuotaForCookie(cookieName, quotaValue);
+    await selectors.submitButton.click();
+
+    // Expect success message
+    await BasePage.expectMessageAppeared(campaignUpdateMessage);
+
+    // Quota should not ignore points and save only integer part
+    await expect(await CampaignPage.getCookieQuotaValue(cookieName)).toEqual(
+      "10"
+    );
+  });
+
+  it("Verify that the Cancel button discards unsaved changes to quotas.", async () => {
+    quotaValue = (await BasePage.generateRandomThreeDigits()).toString();
+    let updateQuotaValue: string = (
+      await BasePage.generateRandomThreeDigits()
+    ).toString();
+    cookieName = cookiesData.cookiesName[8];
+
+    // Open campaign and set initial quota
+    await CampaignPage.searchAndOpenCampaign(campaignData.campaignId);
+    await CampaignPage.fillQuotaForCookie(cookieName, quotaValue);
+    await selectors.submitButton.click();
+    await BasePage.expectMessageAppeared(campaignUpdateMessage);
+
+    // Re-open campaign and update quota value but do not save
+    await BasePage.backToSearchScreen();
+    await CampaignPage.searchAndOpenCampaign(campaignData.campaignId);
+    await CampaignPage.fillQuotaForCookie(cookieName, updateQuotaValue);
+
+    // Click Cancel to discard changes
+    await selectors.cancelButton.click();
+
+    // Validate updated quota value is not saved and original remains
+    await expect(
+      (await CampaignPage.getCookieQuotaValue(cookieName)).toString()
+    ).toEqual(quotaValue);
+  });
+
+  it("Verify that concurrent quota updates are correctly handled and last save wins", async () => {
+    const cookie: string = cookiesData.cookiesName[0];
+    const quota1 = (await BasePage.generateRandomThreeDigits()).toString();
+    const quota2 = (await BasePage.generateRandomThreeDigits()).toString();
+
+    // Tab 1 - open campaign
+    await CampaignPage.searchAndOpenCampaign(campaignData.campaignId);
+    const tab1 = await browser.getWindowHandle();
+
+    // Capture current URL
+    const currentUrl = await browser.getUrl();
+
+    // Tab 2 - open same URL in new tab
+    await browser.newWindow(currentUrl);
+    const tab2 = await browser.getWindowHandle();
+
+    // Execute both quota updates and submit concurrently
+    await Promise.all([
+      (async () => {
+        await browser.switchToWindow(tab1);
+        await CampaignPage.fillQuotaForCookie(cookie, quota1);
+        await selectors.submitButton.click();
+      })(),
+      (async () => {
+        await browser.switchToWindow(tab2);
+        (await CampaignPage.getCookieQuotaInput(cookie)).clearValue();
+        await CampaignPage.fillQuotaForCookie(cookie, quota2);
+        await selectors.submitButton.click();
+      })(),
+    ]);
+
+    // Verify last save wins
+    await browser.switchToWindow(tab1);
+    await browser.refresh();
+    await expect(await CampaignPage.getCookieQuotaValue(cookie)).toEqual(
+      quota2
+    );
+  });
 });

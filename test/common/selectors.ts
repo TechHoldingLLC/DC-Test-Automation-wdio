@@ -7,6 +7,10 @@ export const selectors = {
     );
   },
 
+  get cancelButton() {
+    return $('input[value = "Cancel"]');
+  },
+
   get emailInput() {
     return $('input[id*="email" i], input[name*="email" i]');
   },

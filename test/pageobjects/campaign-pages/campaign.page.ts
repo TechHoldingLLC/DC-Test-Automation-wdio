@@ -27,24 +27,32 @@ class CampaignPage extends Page {
     await BasePage.clickLinkInTableCell("Campaign ID", CampaignId);
   }
 
-  public async getCookieQuotaInput(cookieName: string) {
-    return $(
+  public async getCookieQuotaInput(
+    cookieName: string,
+    session: WebdriverIO.Browser = browser
+  ) {
+    return session.$(
       `//td[contains(., '${cookieName}')]/following-sibling::td/input[contains(@id, '.quota')]`
     );
   }
 
   public async fillQuotaForCookie(
     cookieName: string,
-    quotaValue: string
+    quotaValue: string,
+    session: WebdriverIO.Browser = browser
   ): Promise<void> {
-    const quotaInput = await this.getCookieQuotaInput(cookieName);
+    const quotaInput = await this.getCookieQuotaInput(cookieName, session);
     await quotaInput.waitForClickable();
     await quotaInput.setValue(quotaValue);
   }
 
-  public async getCookieQuotaValue(cookieName: string): Promise<string> {
-    const quotaInput = await this.getCookieQuotaInput(cookieName);
+  public async getCookieQuotaValue(
+    cookieName: string,
+    session: WebdriverIO.Browser = browser
+  ): Promise<string> {
+    const quotaInput = await this.getCookieQuotaInput(cookieName, session);
     return quotaInput.getAttribute("value");
   }
 }
+
 export default new CampaignPage();

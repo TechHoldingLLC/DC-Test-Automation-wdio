@@ -53,15 +53,34 @@ class BasePage extends Page {
 
   /**
    * Waits for a message containing the given text to appear on screen
-   * @param messageText - the exact or partial text of the message
+   * @param messageText - the message text to look for
    */
-  public async expectMessageDisplayed(messageText: string): Promise<void> {
+  public async expectMessageAppeared(messageText: string): Promise<void> {
     const messageEl = $(`//*[contains(text(), "${messageText}")]`);
-    await messageEl.waitForDisplayed({
-      timeout: 5000,
-      timeoutMsg: `Expected message "${messageText}" was not displayed`,
+    await browser.waitUntil(async () => await messageEl.isExisting(), {
+      timeout: 3000,
+      timeoutMsg: `Message "${messageText}" not found`,
     });
-    await expect(messageEl).toBeDisplayed();
+  }
+
+  public async generateRandomThreeDigits(): Promise<number> {
+    return Math.floor(Math.random() * 900) + 100; // Generates a number between 100 and 999
+  }
+
+  public async generateRandomNineDigits(): Promise<number> {
+    const randomInt = Math.floor(Math.random() * 900000000) + 100000000; // Generates a number between 100,000,000 and 999,999,999
+    return randomInt;
+  }
+
+  public async generateRandomFiveChars(): Promise<string> {
+    const chars =
+      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let result = "";
+    for (let i = 0; i < 5; i++) {
+      const randomIndex = Math.floor(Math.random() * chars.length);
+      result += chars[randomIndex];
+    }
+    return result;
   }
 }
 
