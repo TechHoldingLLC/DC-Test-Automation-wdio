@@ -11,7 +11,7 @@ on:
         options:
           - cqa
           - cuat
-          - prod
+          # - prod
 
 jobs:
   wdio-tests:
