@@ -14,4 +14,10 @@ export const selectors = {
   get emailInput() {
     return $('input[id*="email" i], input[name*="email" i]');
   },
+
+  get greenBarPageHeader() {
+    return $(
+      `//div[@id="girlTitle" and contains(@class, "greenBar textCenter")]`
+    );
+  },
 };

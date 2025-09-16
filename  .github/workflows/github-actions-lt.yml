@@ -1,0 +1,43 @@
+name: WebdriverIO Tests (LambdaTest Run)
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Choose test environment"
+        required: true
+        default: "cuat"
+        type: choice
+        options:
+          - cqa
+          - cuat
+          # - prod
+      tags:
+        description: "Optional: Run specific tags (e.g. @smoke, @regression)"
+        required: false
+        default: ""
+
+jobs:
+  wdio-tests-lt:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run WDIO tests on LambdaTest
+        env:
+          LT_USERNAME: ${{ secrets.LT_USERNAME }}
+          LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
+          TEST_ENV: ${{ github.event.inputs.environment }} # Input selection from dropdown
+          TAGS: ${{ github.event.inputs.tags }} # Optional tags input
+        run: npx wdio run ./wdio.github.config.ts
