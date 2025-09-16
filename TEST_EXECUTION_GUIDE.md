@@ -45,6 +45,9 @@ TAGS="@smoke|@regression" npm run test:local:cuat
 -**Run module specific tests [login module example]**
 TAGS="@login" npm run test:local:cuat
 
+-**Run smoke AND login tests**
+TAGS="(?=._@smoke)(?=._@login)" npm run test:local:cuat
+
 ---
 
 ### 📌 List of Available Tags
@@ -55,5 +58,6 @@ TAGS="@login" npm run test:local:cuat
 @registration
 @forgotPassword
 @nationalDashboard
+@campaignQuota
 
 ---
