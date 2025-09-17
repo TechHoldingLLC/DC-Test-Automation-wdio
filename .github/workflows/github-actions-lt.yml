@@ -6,16 +6,12 @@ on:
       environment:
         description: "Choose test environment"
         required: true
-        default: "cuat"
+        default: "cqa"
         type: choice
         options:
           - cqa
           - cuat
           # - prod
-      tags:
-        description: "Optional: Run specific tags (e.g. @smoke, @regression)"
-        required: false
-        default: ""
 
 jobs:
   wdio-tests-lt:
@@ -38,6 +34,4 @@ jobs:
         env:
           LT_USERNAME: ${{ secrets.LT_USERNAME }}
           LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
-          TEST_ENV: ${{ github.event.inputs.environment }} # Input selection from dropdown
-          TAGS: ${{ github.event.inputs.tags }} # Optional tags input
-        run: npx wdio run ./wdio.github.config.ts
+          run: TEST_ENV=${{ github.event.inputs.environment }} npx wdio run ./wdio.github.config.ts
