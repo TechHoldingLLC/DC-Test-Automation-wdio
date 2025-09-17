@@ -73,8 +73,7 @@ class BasePage extends Page {
   }
 
   public async generateRandomFiveChars(): Promise<string> {
-    const chars =
-      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     let result = "";
     for (let i = 0; i < 5; i++) {
       const randomIndex = Math.floor(Math.random() * chars.length);
