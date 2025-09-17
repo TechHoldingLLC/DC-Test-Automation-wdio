@@ -52,32 +52,35 @@ describe("Campaign Quota Tests @campaignQuota", () => {
         (await campaignDetailPage.getCookieQuotaValue(cookie)).toString()
       ).toEqual(quotaValue);
     });
-  });
 
-  it("Verify that an existing quota can be edited", async () => {
-    quotaValue = (await BasePage.generateRandomThreeDigits()).toString();
-    let updatedQuotaValue: string = (
-      await BasePage.generateRandomThreeDigits()
-    ).toString();
-    cookieName = cookiesData.cookiesName[1];
+    it("Verify that an existing quota can be edited", async () => {
+      quotaValue = (await BasePage.generateRandomThreeDigits()).toString();
+      let updatedQuotaValue: string = (
+        await BasePage.generateRandomThreeDigits()
+      ).toString();
+      cookieName = cookiesData.cookiesName[1];
 
-    // Open campaign and set initial quota
-    await CampaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
-    await campaignDetailPage.fillQuotaForCookie(cookieName, quotaValue);
-    await selectors.submitButton.click();
-    await BasePage.expectMessageAppeared(campaignUpdateMessage);
+      // Open campaign and set initial quota
+      await CampaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
+      await campaignDetailPage.fillQuotaForCookie(cookieName, quotaValue);
+      await selectors.submitButton.click();
+      await BasePage.expectMessageAppeared(campaignUpdateMessage);
 
-    // Re-open campaign and update quota
-    await BasePage.backToSearchScreen();
-    await CampaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
-    await campaignDetailPage.fillQuotaForCookie(cookieName, updatedQuotaValue);
-    await selectors.submitButton.click();
-    await BasePage.expectMessageAppeared(campaignUpdateMessage);
+      // Re-open campaign and update quota
+      await BasePage.backToSearchScreen();
+      await CampaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
+      await campaignDetailPage.fillQuotaForCookie(
+        cookieName,
+        updatedQuotaValue
+      );
+      await selectors.submitButton.click();
+      await BasePage.expectMessageAppeared(campaignUpdateMessage);
 
-    // Validate updated quota value is saved
-    await expect(
-      (await campaignDetailPage.getCookieQuotaValue(cookieName)).toString()
-    ).toEqual(updatedQuotaValue);
+      // Validate updated quota value is saved
+      await expect(
+        (await campaignDetailPage.getCookieQuotaValue(cookieName)).toString()
+      ).toEqual(updatedQuotaValue);
+    });
   });
 
   describe("Campaign Quota Only Regression Tests @regression", () => {
@@ -152,7 +155,7 @@ describe("Campaign Quota Tests @campaignQuota", () => {
 
       // Quota should not actually be saved (remains blank)
       await expect(
-        await campaignDetailPage.getCookieQuotaValue("Toffee-tastic")
+        await campaignDetailPage.getCookieQuotaValue(cookieName)
       ).toEqual("");
     });
 

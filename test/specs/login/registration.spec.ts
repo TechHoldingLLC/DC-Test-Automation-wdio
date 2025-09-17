@@ -6,12 +6,15 @@ import { errorMessages } from "../../common/errorMessages.js";
 import { successMessages } from "../../common/successMessages.js";
 import { routes } from "../../common/routes.js";
 import { loadEnvBasedData } from "../../utils/envUtils.js";
+import BasePage from "../../pageobjects/core/basepage.js";
 
 let registrationData: any;
 
+const registrationSuccessMessage = successMessages.registration.confirmation;
+
 describe("Registration Tests @registration", () => {
   before(async () => {
-    registrationData = loadEnvBasedData("login/registrationData.json");
+    registrationData = loadEnvBasedData("login-data/registrationData.json");
   });
 
   beforeEach(async () => {
@@ -51,9 +54,6 @@ describe("Registration Tests @registration", () => {
       registrationData.validRegistrationEmail
     );
     await selectors.submitButton.click();
-    const successElement = $(
-      `//*[contains(text(), "${successMessages.registration.confirmation}")]`
-    );
-    await expect(successElement).toBeDisplayed();
+    await BasePage.expectMessageAppeared(registrationSuccessMessage);
   });
 });
