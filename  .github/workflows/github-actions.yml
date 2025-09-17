@@ -6,7 +6,7 @@ on:
       environment:
         description: "Choose test environment"
         required: true
-        default: "cuat"
+        default: "cqa"
         type: choice
         options:
           - cqa
