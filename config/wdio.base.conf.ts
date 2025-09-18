@@ -1,4 +1,5 @@
 import type { Options } from "@wdio/types";
+import * as path from "path";
 
 export const config: Options.Testrunner = {
   //
@@ -52,11 +53,19 @@ export const config: Options.Testrunner = {
   // of the config file unless it's absolute.
   //
   // specs: ["../test/specs/**/*.ts"],
+  // specs: [path.join(process.cwd(), "test/specs/**/*.ts")],
+
+  // specs: [
+  //   "../test/specs/login.spec.ts",
+  //   "../test/specs/forgotPassword.spec.ts",
+  //   "../test/specs/registration.spec.ts",
+  // ],
   specs: [
-    "../test/specs/login.spec.ts",
-    "../test/specs/forgotPassword.spec.ts",
-    "../test/specs/registration.spec.ts",
-  ], // Patterns to exclude.
+    path.join(process.cwd(), "test/specs/login.spec.ts"),
+    path.join(process.cwd(), "test/specs/forgotPassword.spec.ts"),
+    path.join(process.cwd(), "test/specs/registration.spec.ts"),
+  ],
+
   exclude: [
     // 'path/to/excluded/files'
   ],
