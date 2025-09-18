@@ -51,19 +51,12 @@ export const config: Options.Testrunner = {
   //
   // The path of the spec files will be resolved relative from the directory of
   // of the config file unless it's absolute.
-  //
-  // specs: ["../test/specs/**/*.ts"],
-  // specs: [path.join(process.cwd(), "test/specs/**/*.ts")],
 
-  // specs: [
-  //   "../test/specs/login.spec.ts",
-  //   "../test/specs/forgotPassword.spec.ts",
-  //   "../test/specs/registration.spec.ts",
-  // ],
+  // specs: [path.join(process.cwd(), "test/specs/**/*.ts")],
   specs: [
-    path.join(process.cwd(), "test/specs/login.spec.ts"),
-    path.join(process.cwd(), "test/specs/forgotPassword.spec.ts"),
-    path.join(process.cwd(), "test/specs/registration.spec.ts"),
+    path.join(process.cwd(), "test/specs/login/login.spec.ts"),
+    path.join(process.cwd(), "test/specs/login/forgotPassword.spec.ts"),
+    path.join(process.cwd(), "test/specs/login/registration.spec.ts"),
   ],
 
   exclude: [
