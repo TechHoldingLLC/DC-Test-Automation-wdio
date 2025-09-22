@@ -60,3 +60,5 @@ jobs:
           REPORT_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
           echo "url=$REPORT_URL" >> $GITHUB_OUTPUT
           echo "📊 View Allure Report: $REPORT_URL"
+          echo "📊 [View Allure Report]($REPORT_URL)" >> $GITHUB_STEP_SUMMARY
+
