@@ -25,6 +25,7 @@
     "config/wdio.base.conf.ts",
     "config/wdio.github.conf.ts",
     "config/wdio.local.conf.ts",
-    "config/wdio.lambdatest.conf.ts"
+    "config/wdio.lambdatest.conf.ts",
+    "api/**/*.ts"
   ]
 }
