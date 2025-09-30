@@ -2,7 +2,7 @@ import { expect } from "chai";
 import { getGirl } from "../services/girlService";
 
 describe("GirlScout API Tests", () => {
-  it("Verify GET GirlScout API returns 200 and the correct gsusaId", async () => {
+  it("Verify GET GirlScout API returns 200 status and the correct gsusaId", async () => {
     const gsusaIdValue = "300321847";
 
     const requestBody = {
@@ -21,7 +21,7 @@ describe("GirlScout API Tests", () => {
     // Assert response time < 2s (2000ms)
     expect(duration).to.be.lessThan(2000);
     console.log(`Response time: ${duration} ms`);
-    
+
     // Assert response body
     expect(response.data).to.be.an("object");
     expect(response.data).to.have.property("girl");
