@@ -1,4 +1,6 @@
 "BROKEN","EPIC","FAILED","FEATURE","PASSED","SKIPPED","STORY","UNKNOWN"
-"0","","0","Registration Tests @registration","3","0","","0"
-"0","","0","Login Tests @regression @smoke @login","3","0","","0"
 "0","","0","Forgot Password Tests @forgot password","4","0","","0"
+"0","","0","Campaign Quota Tests @campaignQuota: Campaign Quota Only Regression Tests @regression","7","1","","0"
+"0","","0","Login Tests @regression @smoke @login","3","0","","0"
+"0","","0","Campaign Quota Tests @campaignQuota: Campaign Quota Smoke and Regression Tests @smoke @regression","2","0","","0"
+"0","","0","Registration Tests @registration","3","0","","0"
