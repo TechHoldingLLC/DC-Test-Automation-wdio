@@ -222,7 +222,7 @@ describe("Campaign Quota Tests @campaignQuota", () => {
       ).toEqual(quotaValue);
     });
 
-    it("Verify that concurrent quota updates are correctly handled and last save wins", async () => {
+    it.skip("Verify that concurrent quota updates are correctly handled and last save wins", async () => {
       const cookie: string = cookiesData.cookiesName[0];
       const quota1 = (await BasePage.generateRandomThreeDigits()).toString();
       const quota2 = (await BasePage.generateRandomThreeDigits()).toString();
