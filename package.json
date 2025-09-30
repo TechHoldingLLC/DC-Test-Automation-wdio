@@ -26,8 +26,7 @@
     "test:local:cqa": "TEST_ENV=cqa wdio run ./config/wdio.local.conf.ts",
     "test:local:cuat": "TEST_ENV=cuat wdio run ./config/wdio.local.conf.ts",
     "__comment_test_local_prod": "TEST_ENV=prod wdio run ./config/wdio.local.conf.ts",
-    "help": "cat TEST_EXECUTION_GUIDE.md",
-    "test:api": "mocha -r ts-node/register api/tests/**/*.spec.ts"
+    "help": "cat TEST_EXECUTION_GUIDE.md"
   },
   "dependencies": {
     "axios": "^1.12.2"

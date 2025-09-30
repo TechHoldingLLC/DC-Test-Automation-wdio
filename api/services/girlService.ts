@@ -3,7 +3,7 @@ import { GirlResponse } from "../types/girl";
 
 const BASE_URL =
   "https://api.ccifn5lai-girlscout2-p2-public.model-t.cc.commerce.ondemand.com/rest/v2";
-const TOKEN = "-rykdIrDio8ie67VsSNKqjf6ebU";
+const TOKEN = "GSi2EkpyreOMAD11o_efdyePBsU";
 
 const client = new AxiosClient(BASE_URL, TOKEN);
 
