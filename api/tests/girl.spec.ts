@@ -1,30 +1,32 @@
-import { expect } from "chai";
+import { expect } from "@wdio/globals";
 import { getGirl } from "../services/girlService";
 
 describe("GirlScout API Tests", () => {
-  it("Verify GET GirlScout API returns 200 status and the correct gsusaId", async () => {
+  it("Verify GirlScout API returns 200 status and the correct gsusaId", async () => {
     const gsusaIdValue = "300321847";
+    const token = "xuO8bLooVvYvrVilDHrY5ZtbuYI"; // Pass token here
 
     const requestBody = {
-      transaction: { id: "B-B50P1AF39EAE2" },
-      girls: { gsusaId: gsusaIdValue }, // request has "girls"
+      transaction: { id: "B-B50P1AF39EAE23" },
+      girls: { gsusaId: gsusaIdValue },
     };
 
+    // Record start time
     const startTime = Date.now();
-    const response = (await getGirl(requestBody)) as any;
-    const endTime = Date.now();
-    const duration = endTime - startTime; // duration in milliseconds
 
-    // Assert status
-    expect(response.status).to.equal(200);
+    // Send API request with token
+    const response = (await getGirl(requestBody, token)) as any;
 
-    // Assert response time < 2s (2000ms)
-    expect(duration).to.be.lessThan(2000);
+    // Record end time & calculate duration
+    const duration = Date.now() - startTime;
+
+    // Log to console
     console.log(`Response time: ${duration} ms`);
 
-    // Assert response body
-    expect(response.data).to.be.an("object");
-    expect(response.data).to.have.property("girl");
-    expect(response.data.girl).to.have.property("gsusaId", gsusaIdValue);
+    // Assertions
+    expect(response.status).toEqual(200); // status 200
+    expect(duration).toBeLessThan(2000); // response time < 2s
+    expect(response.data).toHaveProperty("girl"); // contains "girl"
+    expect(response.data.girl).toHaveProperty("gsusaId", gsusaIdValue); // correct gsusaId
   });
 });

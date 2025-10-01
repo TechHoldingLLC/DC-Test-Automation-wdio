@@ -4,7 +4,6 @@ import { config as baseConfig } from "./wdio.base.conf";
 export const config: Options.Testrunner = {
   ...baseConfig,
 
-  // Only API test specs
   specs: ["../api/tests/**/*.ts"],
 
   capabilities: [
@@ -22,6 +21,6 @@ export const config: Options.Testrunner = {
   },
 
   before: function () {
-    console.log("Running API tests...");
+    console.log("Running tests...");
   },
 };
