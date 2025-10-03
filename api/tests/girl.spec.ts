@@ -15,7 +15,6 @@ describe("Get Girl API Test", () => {
     const { response, responseTime } = await getGirl(requestBody, token);
     console.log(`Response time: ${responseTime} ms`);
     console.log("Response body:", response.body);
-    console.log("Request URL:", getApiBaseUrl() + "/girlscouts/getGirl");
 
     // Assertions
     expect(response.status).toBe(200);
