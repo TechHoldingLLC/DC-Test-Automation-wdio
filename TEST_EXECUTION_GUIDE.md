@@ -61,3 +61,7 @@ TAGS="(?=._@smoke)(?=._@login)" npm run test:local:cuat
 @campaignQuota
 
 ---
+
+### Run API Tests
+
+TEST_ENV=cuat npx wdio run ./config/wdio.api.conf.ts
