@@ -26,10 +26,4 @@ export const config: WebdriverIO.Config = {
   ],
 
   services: [],
-
-  mochaOpts: {
-    ui: "bdd",
-    timeout: 1200000,
-    grep: process.env.TAGS || "", // Pick tags dynamically from CLI/env
-  },
 };
