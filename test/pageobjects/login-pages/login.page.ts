@@ -1,6 +1,9 @@
 import { $ } from "@wdio/globals";
 import Page from "../core/page.js";
 import * as loginData from "../../data/login-data/loginData.json";
+import * as dotenv from "dotenv";
+
+dotenv.config();
 
 class LoginPage extends Page {
   public get inputEmail() {
@@ -10,6 +13,7 @@ class LoginPage extends Page {
   public get inputPassword() {
     return $("#password");
   }
+
 
   public get btnLogin() {
     return $("#loginButton");
@@ -34,20 +38,29 @@ class LoginPage extends Page {
   }
 
   /**
-   * Logs in with provided username and password.
+   * Returns the password to use: first from .env (PASSWORD_LOCAL), fallback to GitHub Secrets (PASSWORD_GITHUB)
    */
-  public async login(
-    username: string = loginData.validEmail,
-    password: string = loginData.validPassword
-  ) {
-    await this.inputEmail.setValue(username);
-    await this.inputPassword.setValue(password);
-    await this.btnLogin.click();
+  public getPassword(): string {
+    const password = process.env.PASSWORD_LOCAL || process.env.PASSWORD_GITHUB;
+    if (!password) {
+      throw new Error(
+        "Missing password. Please set PASSWORD_LOCAL in .env or PASSWORD_GITHUB in GitHub Secrets."
+      );
+    }
+    return password;
   }
 
   /**
-   * Logs out the current user by clicking the logout button
+   * Logs in with provided username and password.
+   * If password is not provided, uses getPassword()
    */
+  public async login(username: string = loginData.validEmail, password?: string) {
+    const pwd = password || this.getPassword();
+    await this.inputEmail.setValue(username);
+    await this.inputPassword.setValue(pwd);
+    await this.btnLogin.click();
+  }
+
   public async logout() {
     await this.btnLogout.waitForClickable();
     await this.btnLogout.click();
@@ -60,9 +73,6 @@ class LoginPage extends Page {
     );
   }
 
-  /**
-   * Opens the login page by navigating to the 'login' route
-   */
   public open() {
     return super.open("login");
   }

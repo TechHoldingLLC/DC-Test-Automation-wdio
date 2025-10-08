@@ -1,5 +1,0 @@
-"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
-"","16362","Verify that login with invalid credentials are not allowed","","Thu Sep 18 15:15:14 IST 2025","passed","Thu Sep 18 15:15:31 IST 2025","","Login Tests @regression @smoke @login","",""
-"","17541","Verify login with valid credentials","","Thu Sep 18 15:14:42 IST 2025","passed","Thu Sep 18 15:15:00 IST 2025","","Login Tests @regression @smoke @login","",""
-"","14810","Verify that Email and Password are mandatory","","Thu Sep 18 15:15:00 IST 2025","passed","Thu Sep 18 15:15:14 IST 2025","","Login Tests @regression @smoke @login","",""
-"","99542","Verify that concurrent quota updates are correctly handled and last save wins @only","","Thu Sep 18 12:36:55 IST 2025","passed","Thu Sep 18 12:38:34 IST 2025","","Campaign Quota Tests @campaignQuota: Campaign Quota Only Regression Tests @regression","",""

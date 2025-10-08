@@ -19,7 +19,9 @@ describe("Login Tests @regression @smoke @login", () => {
    * Expected Result: User is redirected to the national dashboard page
    */
   it("Verify login with valid credentials", async () => {
-    await LoginPage.login(loginData.validEmail, loginData.validPassword);
+    // Password is automatically fetched from PASSWORD_LOCAL or PASSWORD_GITHUB
+    await LoginPage.login(loginData.validEmail);
+
     await expect(browser).toHaveUrl(
       expect.stringContaining(routes.dashboard.national)
     );
