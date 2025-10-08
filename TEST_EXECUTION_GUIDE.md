@@ -5,6 +5,22 @@ Tests use **Mocha with `grep` filtering** for tags (e.g., `@smoke`, `@regression
 
 ---
 
+### ⚙️ Setting Environment Variables Before Running Tests
+
+Before executing tests on your local machine or on LambdaTest, you need to set the following environment variables in
+.env file
+
+export LT_USERNAME=<your_lambdatest_username>
+export LT_ACCESS_KEY=<your_lambdatest_access_key>
+export PASSWORD_LOCAL=<login_user_password>
+
+Important:
+
+- Do not commit the .env file or these credentials to version control.
+- Env file credentials are not required when executing from github-actions.
+
+---
+
 ### 🌍 Environments (Execution without tags)
 
 You can run tests against different environments
@@ -34,7 +50,7 @@ npm run test:lt:PROD
 You can run with Tags, On desired Env., On Lamdatest or Local
 
 -**Run smoke tests on LambdaTest CQA**
-TAGS="@smoke" npm run test:local:cuat
+TAGS="@smoke" npm run test:lt:cqa
 
 -**Run regression tests on Local CUAT**
 TAGS="@regression" npm run test:local:cuat

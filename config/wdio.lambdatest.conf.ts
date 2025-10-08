@@ -106,13 +106,4 @@ export const config: WebdriverIO.Config = {
     },
     */
   ],
-
-  // ====================
-  // Mocha options
-  // ====================
-  mochaOpts: {
-    ui: "bdd",
-    timeout: 1200000, // 20 minutes, adjust if needed
-    grep: process.env.TAGS || "", // Pick tags dynamically from workflow_dispatch input
-  },
 };
