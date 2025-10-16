@@ -1,4 +1,4 @@
-import CampaignSearchPage from "../../pageobjects/campaign-pages/campaignSearch.page.js";
+import campaignSearchPage from "../../pageobjects/campaign-pages/campaignSearch.page.js";
 import campaignDetailPage from "../../pageobjects/campaign-pages/campaignDetail.page.js";
 import { expect } from "@wdio/globals";
 import { loadEnvBasedData } from "../../utils/envUtils.js";
@@ -25,7 +25,7 @@ describe("Campaign Quota Tests @campaignQuota", () => {
 
   // Navigate to Campaign Page before each test
   beforeEach(async () => {
-    await CampaignSearchPage.open();
+    await campaignSearchPage.open();
   });
 
   describe("Campaign Quota Smoke and Regression Tests @smoke @regression", () => {
@@ -34,7 +34,7 @@ describe("Campaign Quota Tests @campaignQuota", () => {
       let cookie: string = cookiesData.cookiesName[0];
 
       // Open specific campaign by ID
-      await CampaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
+      await campaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
 
       // Fill quota for a cookie
       await campaignDetailPage.fillQuotaForCookie(cookie, quotaValue);
@@ -45,7 +45,7 @@ describe("Campaign Quota Tests @campaignQuota", () => {
 
       // Go back and re-open campaign to confirm persistence
       await BasePage.backToSearchScreen();
-      await CampaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
+      await campaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
 
       // Assert quota value matches the expected input
       await expect(
@@ -61,14 +61,14 @@ describe("Campaign Quota Tests @campaignQuota", () => {
       cookieName = cookiesData.cookiesName[1];
 
       // Open campaign and set initial quota
-      await CampaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
+      await campaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
       await campaignDetailPage.fillQuotaForCookie(cookieName, quotaValue);
       await selectors.submitButton.click();
       await BasePage.expectMessageAppeared(campaignUpdateMessage);
 
       // Re-open campaign and update quota
       await BasePage.backToSearchScreen();
-      await CampaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
+      await campaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
       await campaignDetailPage.fillQuotaForCookie(
         cookieName,
         updatedQuotaValue
@@ -89,15 +89,15 @@ describe("Campaign Quota Tests @campaignQuota", () => {
       cookieName = cookiesData.cookiesName[2];
 
       // Set quota and save
-      await CampaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
+      await campaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
       await campaignDetailPage.fillQuotaForCookie(cookieName, quotaValue);
       await selectors.submitButton.click();
       await BasePage.expectMessageAppeared(campaignUpdateMessage);
 
       // Logout and login again
       await LoginPage.logout();
-      await CampaignSearchPage.open();
-      await CampaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
+      await campaignSearchPage.open();
+      await campaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
 
       // Verify quota is still set correctly
       await expect(
@@ -110,7 +110,7 @@ describe("Campaign Quota Tests @campaignQuota", () => {
       cookieName = cookiesData.cookiesName[3];
 
       // Save initial quota
-      await CampaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
+      await campaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
       await campaignDetailPage.fillQuotaForCookie(cookieName, quotaValue);
       await selectors.submitButton.click();
       await BasePage.expectMessageAppeared(campaignUpdateMessage);
@@ -130,7 +130,7 @@ describe("Campaign Quota Tests @campaignQuota", () => {
       cookieName = cookiesData.cookiesName[4];
 
       // Set large quota
-      await CampaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
+      await campaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
       await campaignDetailPage.fillQuotaForCookie(cookieName, quotaValue);
       await selectors.submitButton.click();
       await BasePage.expectMessageAppeared(campaignUpdateMessage);
@@ -146,7 +146,7 @@ describe("Campaign Quota Tests @campaignQuota", () => {
       cookieName = cookiesData.cookiesName[5];
 
       // Try setting non-numeric quota
-      await CampaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
+      await campaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
       await campaignDetailPage.fillQuotaForCookie(cookieName, quotaValue);
       await selectors.submitButton.click();
 
@@ -164,7 +164,7 @@ describe("Campaign Quota Tests @campaignQuota", () => {
       cookieName = cookiesData.cookiesName[6];
 
       // Try setting non-numeric quota
-      await CampaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
+      await campaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
       await campaignDetailPage.fillQuotaForCookie(cookieName, quotaValue);
       await selectors.submitButton.click();
 
@@ -182,7 +182,7 @@ describe("Campaign Quota Tests @campaignQuota", () => {
       cookieName = cookiesData.cookiesName[7];
 
       // Try setting non-numeric quota
-      await CampaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
+      await campaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
       await campaignDetailPage.fillQuotaForCookie(cookieName, quotaValue);
       await selectors.submitButton.click();
 
@@ -203,14 +203,14 @@ describe("Campaign Quota Tests @campaignQuota", () => {
       cookieName = cookiesData.cookiesName[8];
 
       // Open campaign and set initial quota
-      await CampaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
+      await campaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
       await campaignDetailPage.fillQuotaForCookie(cookieName, quotaValue);
       await selectors.submitButton.click();
       await BasePage.expectMessageAppeared(campaignUpdateMessage);
 
       // Re-open campaign and update quota value but do not save
       await BasePage.backToSearchScreen();
-      await CampaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
+      await campaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
       await campaignDetailPage.fillQuotaForCookie(cookieName, updateQuotaValue);
 
       // Click Cancel to discard changes
@@ -228,7 +228,7 @@ describe("Campaign Quota Tests @campaignQuota", () => {
       const quota2 = (await BasePage.generateRandomThreeDigits()).toString();
 
       // Tab 1 - open campaign
-      await CampaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
+      await campaignSearchPage.searchAndOpenCampaign(campaignData.campaignId);
       const tab1 = await browser.getWindowHandle();
 
       // Capture current URL

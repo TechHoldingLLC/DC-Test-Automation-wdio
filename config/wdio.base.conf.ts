@@ -11,6 +11,7 @@ export const config: Options.Testrunner = {
     path.join(process.cwd(), "test/specs/login/forgotPassword.spec.ts"),
     path.join(process.cwd(), "test/specs/login/registration.spec.ts"),
     path.join(process.cwd(), "test/specs/campaign/campaignQuota.spec.ts"),
+    path.join(process.cwd(), "test/specs/campaign/campaign.spec.ts"),
   ],
 
   exclude: [
