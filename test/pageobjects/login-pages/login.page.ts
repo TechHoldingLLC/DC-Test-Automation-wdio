@@ -14,7 +14,6 @@ class LoginPage extends Page {
     return $("#password");
   }
 
-
   public get btnLogin() {
     return $("#loginButton");
   }
@@ -38,13 +37,15 @@ class LoginPage extends Page {
   }
 
   /**
-   * Returns the password to use: first from .env (PASSWORD_LOCAL), fallback to GitHub Secrets (PASSWORD_GITHUB)
+   * Returns the password to use: first from .env (DC_LOGIN_PASSWORD_LOCAL), fallback to GitHub Secrets (DC_LOGIN_PASSWORD_GITHUB)
    */
   public getPassword(): string {
-    const password = process.env.PASSWORD_LOCAL || process.env.PASSWORD_GITHUB;
+    const password =
+      process.env.DC_LOGIN_PASSWORD_LOCAL ||
+      process.env.DC_LOGIN_PASSWORD_GITHUB;
     if (!password) {
       throw new Error(
-        "Missing password. Please set PASSWORD_LOCAL in .env or PASSWORD_GITHUB in GitHub Secrets."
+        "Missing password. Please set DC_LOGIN_PASSWORD_LOCAL in .env or DC_LOGIN_PASSWORD_GITHUB in GitHub Secrets."
       );
     }
     return password;
@@ -54,7 +55,10 @@ class LoginPage extends Page {
    * Logs in with provided username and password.
    * If password is not provided, uses getPassword()
    */
-  public async login(username: string = loginData.validEmail, password?: string) {
+  public async login(
+    username: string = loginData.validEmail,
+    password?: string
+  ) {
     const pwd = password || this.getPassword();
     await this.inputEmail.setValue(username);
     await this.inputPassword.setValue(pwd);

@@ -12,7 +12,7 @@ Before executing tests on your local machine or on LambdaTest, you need to set t
 
 export LT_USERNAME=<your_lambdatest_username>
 export LT_ACCESS_KEY=<your_lambdatest_access_key>
-export PASSWORD_LOCAL=<login_user_password>
+export DC_LOGIN_PASSWORD_LOCAL=<login_user_password>
 
 Important:
 
