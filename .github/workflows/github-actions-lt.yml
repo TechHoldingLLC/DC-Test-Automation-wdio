@@ -38,7 +38,7 @@ jobs:
       # Run WebdriverIO tests on LambdaTest
       - name: Run WDIO tests on LambdaTest
         env:
-          PASSWORD_GITHUB: ${{ secrets.PASSWORD_GITHUB }}
+          DC_LOGIN_PASSWORD_GITHUB: ${{ secrets.DC_LOGIN_PASSWORD_GITHUB }}
           LT_USERNAME: ${{ secrets.LT_USERNAME }}
           LT_ACCESS_KEY: ${{ secrets.LT_ACCESS_KEY }}
         run: TEST_ENV=${{ github.event.inputs.environment }} npx wdio run ./config/wdio.lambdatest.conf.ts

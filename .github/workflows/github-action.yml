@@ -38,7 +38,7 @@ jobs:
       # Run WebdriverIO tests
       - name: Run WDIO tests
         env:
-          PASSWORD_GITHUB: ${{ secrets.PASSWORD_GITHUB }}
+          DC_LOGIN_PASSWORD_GITHUB: ${{ secrets.DC_LOGIN_PASSWORD_GITHUB }}
         run: TEST_ENV=${{ github.event.inputs.environment }} npx wdio run ./config/wdio.github.conf.ts
 
       # Generate Allure Report
